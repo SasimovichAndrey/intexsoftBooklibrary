@@ -16,13 +16,11 @@ import intexsoftBookLibrary.library.Book;
 import intexsoftBookLibrary.library.Library;
 
 public class MySqlLibraryDAO implements ILibraryDAO{
-	private Session session;
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Library> getAllLibraries() throws DAOException {
 		try{
- 			this.session = HibernateConnector.getSession();
+ 			Session session = HibernateConnector.getSession();
 			
 			Criteria crit = session.createCriteria(Library.class);
 	
@@ -46,8 +44,9 @@ public class MySqlLibraryDAO implements ILibraryDAO{
 	
 	@Override
 	public Integer create(Library library) throws DAOException, InvalidLibraryFieldValueException, InvalidNewLibraryBookException {
+		Session session = null;
 		try{
- 			this.session = HibernateConnector.getSession();
+			session = HibernateConnector.getSession();
  			if(library.getName() == null)
  				throw new InvalidLibraryFieldValueException("Somelibrary fields are null");
  			if(library.getBooks() != null){
@@ -70,11 +69,15 @@ public class MySqlLibraryDAO implements ILibraryDAO{
 			e.printStackTrace(System.out);
 			throw new DAOException();
 		}
+		finally{
+			if(session != null)
+				session.close();
+		}
 	}
 	
 	public Library getLibraryById(Integer id) throws DAOException{
 		try{
- 			this.session = HibernateConnector.getSession();
+ 			Session session = HibernateConnector.getSession();
  			Library library = (Library)session.load(Library.class, id);
  			return library;
 		}
@@ -85,6 +88,28 @@ public class MySqlLibraryDAO implements ILibraryDAO{
 		catch(HibernateException e){
 			e.printStackTrace(System.out);
 			throw new DAOException();
+		}
+	}
+	
+	public void delete(Library library) throws DAOException{
+		Session session = null;
+		try{
+ 			session = HibernateConnector.getSession();
+ 			session.beginTransaction();
+ 			session.delete(library);
+ 			session.getTransaction().commit();
+		}
+		catch (HiberanteConfigException e) {
+			e.printStackTrace();
+			throw new DAOException("Hibernate config exception");
+		}
+		catch(HibernateException e){
+			e.printStackTrace(System.out);
+			throw new DAOException();
+		}
+		finally{
+			if(session != null)
+				session.close();
 		}
 	}
 }

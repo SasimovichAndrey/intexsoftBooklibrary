@@ -15,7 +15,7 @@ public class Library{
 		
 	}
 	
-	public Library(int id, String name) {
+	public Library(Integer id, String name) {
 		this.books = new ArrayList<Book>();
 		this.name = name;
 	}

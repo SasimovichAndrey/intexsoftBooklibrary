@@ -11,6 +11,6 @@
 	    <property column="title" name="title" type="java.lang.String"/>
 	    <property column="issuedate" name="issueDate" type="java.util.Date"/>
 	    <property column="reader" name="reader" type="java.lang.String"/>
-	    <many-to-one name="library" column="lib_id" class="intexsoftBookLibrary.library.Library" lazy="false"/>
+	    <many-to-one name="library" column="lib_id" class="intexsoftBookLibrary.library.Library" not-null="true"/>
 	</class>
 </hibernate-mapping>

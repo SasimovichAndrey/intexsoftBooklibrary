@@ -8,9 +8,9 @@
 		      <generator class="increment"/>
 		</id>
 		<property column="name" name="name" type="java.lang.String"/>
-		<list name="books" cascade="all" lazy="true">
+		<list name="books" cascade="save-update, delete" inverse="true" lazy="false">
 	      <key column="lib_id"/>
-	      <list-index column="id"/>
+	      <list-index column="book_index"/>
 	      <one-to-many class="intexsoftBookLibrary.library.Book"/>
 	    </list>
 	</class>

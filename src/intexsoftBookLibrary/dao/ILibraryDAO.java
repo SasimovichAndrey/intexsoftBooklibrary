@@ -17,4 +17,6 @@ public interface ILibraryDAO {
 	public Integer create(Library library) throws DAOException, InvalidLibraryFieldValueException, InvalidNewLibraryBookException;
 
 	public Library getLibraryById(Integer id) throws DAOException;
+	
+	public void delete(Library library) throws DAOException;
 }
