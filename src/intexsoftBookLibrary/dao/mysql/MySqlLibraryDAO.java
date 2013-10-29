@@ -28,11 +28,11 @@ public class MySqlLibraryDAO implements ILibraryDAO{
 		}
 		catch (HiberanteConfigException e) {
 			e.printStackTrace();
-			throw new DAOException("Hibernate config exception");
+			throw new DAOException("Hibernate config exception", e);
 		}
 		catch(HibernateException e){
 			e.printStackTrace(System.out);
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 	}
 
@@ -63,11 +63,11 @@ public class MySqlLibraryDAO implements ILibraryDAO{
 		}
 		catch (HiberanteConfigException e) {
 			e.printStackTrace();
-			throw new DAOException("Hibernate config exception");
+			throw new DAOException("Hibernate config exception", e);
 		}
 		catch(HibernateException e){
 			e.printStackTrace(System.out);
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 		finally{
 			if(session != null)
@@ -83,11 +83,11 @@ public class MySqlLibraryDAO implements ILibraryDAO{
 		}
 		catch (HiberanteConfigException e) {
 			e.printStackTrace();
-			throw new DAOException("Hibernate config exception");
+			throw new DAOException("Hibernate config exception", e);
 		}
 		catch(HibernateException e){
 			e.printStackTrace(System.out);
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 	}
 	
@@ -101,11 +101,11 @@ public class MySqlLibraryDAO implements ILibraryDAO{
 		}
 		catch (HiberanteConfigException e) {
 			e.printStackTrace();
-			throw new DAOException("Hibernate config exception");
+			throw new DAOException("Hibernate config exception", e);
 		}
 		catch(HibernateException e){
 			e.printStackTrace(System.out);
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 		finally{
 			if(session != null)

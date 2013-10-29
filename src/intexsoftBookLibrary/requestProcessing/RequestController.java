@@ -36,6 +36,6 @@ public class RequestController {
 			return processorMap.get(request.getCommand()).process(request);
 		}
 		else
-			throw new UnknownRequestTypeException();
+			throw new UnknownRequestTypeException("Invalid request type: " + request.getCommand());
 	}
 }

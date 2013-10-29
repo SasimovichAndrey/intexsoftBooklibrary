@@ -21,7 +21,7 @@ public class HibernateConnector {
 		}
 		catch(HibernateException e){
 			e.printStackTrace(System.out);
-			throw new HiberanteConfigException();
+			throw new HiberanteConfigException(e);
 		}
 	}
 

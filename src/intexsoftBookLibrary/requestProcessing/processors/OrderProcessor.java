@@ -1,12 +1,12 @@
 package intexsoftBookLibrary.requestProcessing.processors;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 
 import intexsoftBookLibrary.dao.DAOFactory;
 import intexsoftBookLibrary.dao.DbType;
 import intexsoftBookLibrary.dao.IBookDAO;
-import intexsoftBookLibrary.dao.mysql.exceptions.BookNotFoundException;
 import intexsoftBookLibrary.dao.mysql.exceptions.DAOException;
 import intexsoftBookLibrary.library.*;
 import intexsoftBookLibrary.requestProcessing.MenuRequest;
@@ -27,7 +27,7 @@ public class OrderProcessor implements IRequestProcessor{
 			bookID = Integer.parseInt(request.getParam("id")); // ID искомой книги
 			String abonent = request.getParam("abonent"); // имя абонента, запрашивающего книгу
 			if(abonent==null)
-				throw new RequestFormatException();
+				throw new RequestFormatException("");
 			
 			DAOFactory sqlDAOFactory = DAOFactory.getFactory(DbType.MYSQL);
 			IBookDAO bookDAO = sqlDAOFactory.getBookDAO();
@@ -41,7 +41,7 @@ public class OrderProcessor implements IRequestProcessor{
 				results.put(AnswerMapKeys.IS_ORDERED, new Boolean(reqBook.getReader() == null));
 				if((Boolean)results.get(AnswerMapKeys.IS_ORDERED)){
 					reqBook.setReader(abonent);
-					reqBook.setIssueDate(new Date());
+					reqBook.setIssueDate(new Timestamp(new Date().getTime()));
 					results.put(AnswerMapKeys.ABONENT, abonent);
 					bookDAO.update(reqBook);
 				}
@@ -50,7 +50,7 @@ public class OrderProcessor implements IRequestProcessor{
 			else{
 				results.put(AnswerMapKeys.IS_FINDED, new Boolean(true));
 			}
-			results.put(AnswerMapKeys.DATE, new Date());
+			results.put(AnswerMapKeys.DATE, new Timestamp(new Date().getTime()));
 			
 			answer.setResultMap(results);
 			
@@ -60,12 +60,8 @@ public class OrderProcessor implements IRequestProcessor{
 			e.printStackTrace();
 			throw new DataBaseAccessException();
 		}
-		catch (BookNotFoundException e) {
-			e.printStackTrace();
-		}
 		catch (NumberFormatException e) {
-			throw new RequestFormatException();
+			throw new RequestFormatException("Invalid id:" + request.getParam("id"), e);
 		}
-		return null;
 	}
 }

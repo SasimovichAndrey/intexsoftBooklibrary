@@ -31,11 +31,8 @@ public class ConsoleBookLibrary {
 		MySqlConstants.Initialize(propertyMap);
 		try {
 			HibernateConnector.configureHibernate();
-		} catch (HiberanteConfigException e) {
-			e.printStackTrace();
-			throw new HiberanteConfigException();
 		} catch(HibernateException e){
-			throw new DataBaseAccessException(e.getMessage());
+			throw new DataBaseAccessException(e);
 		}
 		reqProcessor = new RequestController();
 		txtInterface = new TextInterface();

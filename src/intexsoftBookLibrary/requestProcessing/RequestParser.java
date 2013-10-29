@@ -13,7 +13,7 @@ public class RequestParser {
 		splitRequest[0] = splitRequest[0].toUpperCase();
 		
 		if(splitRequest.length == 0){
-				throw new RequestFormatException();
+				throw new RequestFormatException("Empty request");
 		}
 		
 		HashMap<String, String> paramMap = new HashMap<String, String>();
@@ -22,8 +22,9 @@ public class RequestParser {
 			String[] splitParam = splitRequest[i].split("=");
 			if(splitParam.length > 1)
 				paramMap.put(splitParam[0], splitParam[1]);
-			else
-				throw new RequestFormatException();
+			else{
+				throw new RequestFormatException("Invalid parameter:" + splitRequest[i]);
+			}
 		}
 		
 		String reqCommand;

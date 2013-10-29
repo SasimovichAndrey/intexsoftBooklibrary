@@ -40,7 +40,7 @@ public class FindProcessor implements IRequestProcessor{
 			return answer;
 		}
 		catch(DAOException e){
-			throw new DataBaseAccessException();
+			throw new DataBaseAccessException(e);
 		}
 	}
 }

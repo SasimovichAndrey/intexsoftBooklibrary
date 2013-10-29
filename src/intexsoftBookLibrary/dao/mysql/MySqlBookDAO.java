@@ -3,7 +3,6 @@ package intexsoftBookLibrary.dao.mysql;
 import java.util.List;
 
 import intexsoftBookLibrary.dao.IBookDAO;
-import intexsoftBookLibrary.dao.mysql.exceptions.BookNotFoundException;
 import intexsoftBookLibrary.dao.mysql.exceptions.DAOException;
 import intexsoftBookLibrary.dao.mysql.exceptions.HiberanteConfigException;
 import intexsoftBookLibrary.dao.mysql.exceptions.InvalidBookFieldValueException;
@@ -53,18 +52,18 @@ public class MySqlBookDAO implements IBookDAO {
 		}
 		catch (HiberanteConfigException e) {
 			e.printStackTrace();
-			throw new DAOException("Hibernate config exception");
+			throw new DAOException("Hibernate config exception", e);
 		}
 		catch(HibernateException e){
 			e.printStackTrace(System.out);
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 		finally{
 			session.close();
 		}
 	}
 
-	public void update(Book book) throws DAOException, BookNotFoundException{
+	public void update(Book book) throws DAOException{ // Обработать ситуацию с несуществующей книгой
 		try{
 			this.session = HibernateConnector.getSession();
  			
@@ -74,11 +73,11 @@ public class MySqlBookDAO implements IBookDAO {
 		}
 		catch (HiberanteConfigException e) {
 			e.printStackTrace();
-			throw new DAOException("Hibernate config exception");
+			throw new DAOException("Hibernate config exception", e);
 		}
 		catch(HibernateException e){
 			e.printStackTrace(System.out);
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 		finally{
 			session.close();
@@ -96,15 +95,16 @@ public class MySqlBookDAO implements IBookDAO {
 		try{
 			session = HibernateConnector.getSession();
 			Book book = (Book)session.get(Book.class, (Integer)id);
+			
 			return book;
 		}
 		catch (HibernateException e) {
 			e.printStackTrace();
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 		catch (HiberanteConfigException e) {
 			e.printStackTrace();
-			throw new DAOException("Hibernate config exception");
+			throw new DAOException("Hibernate config exception", e);
 		}
 		finally{
 			session.close();
@@ -121,11 +121,11 @@ public class MySqlBookDAO implements IBookDAO {
 		}
 		catch (HibernateException e) {
 			e.printStackTrace();
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 		catch (HiberanteConfigException e) {
 			e.printStackTrace();
-			throw new DAOException("Hibernate config exception");
+			throw new DAOException("Hibernate config exception", e);
 		}
 		finally{
 			session.close();

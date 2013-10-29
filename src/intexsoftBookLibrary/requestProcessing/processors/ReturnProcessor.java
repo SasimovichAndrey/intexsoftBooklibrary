@@ -5,7 +5,6 @@ import java.util.HashMap;
 import intexsoftBookLibrary.dao.DAOFactory;
 import intexsoftBookLibrary.dao.DbType;
 import intexsoftBookLibrary.dao.IBookDAO;
-import intexsoftBookLibrary.dao.mysql.exceptions.BookNotFoundException;
 import intexsoftBookLibrary.dao.mysql.exceptions.DAOException;
 import intexsoftBookLibrary.library.Book;
 import intexsoftBookLibrary.requestProcessing.MenuRequest;
@@ -26,7 +25,7 @@ public class ReturnProcessor implements IRequestProcessor{
 			bookID = Integer.parseInt(request.getParam("id")); // ID искомой книги
 		}
 		catch(NumberFormatException e){
-			throw new RequestFormatException();
+			throw new RequestFormatException("Invalid book ID: " + request.getParam("id"), e);
 		}
 		
 		DAOFactory sqlDaoFactory = DAOFactory.getFactory(DbType.MYSQL);
@@ -55,8 +54,6 @@ public class ReturnProcessor implements IRequestProcessor{
 				} catch (DAOException e) {
 					e.printStackTrace();
 					throw new DataBaseAccessException();
-				} catch (BookNotFoundException e) {
-					e.printStackTrace();
 				}
 			}
 		}

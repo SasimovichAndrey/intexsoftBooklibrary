@@ -9,8 +9,8 @@
 	    </id>
 	    <property column="author" name="author" type="java.lang.String"/>
 	    <property column="title" name="title" type="java.lang.String"/>
-	    <property column="issuedate" name="issueDate" type="java.util.Date"/>
+	    <property column="issuedate" name="issueDate" type="java.sql.Timestamp"/>
 	    <property column="reader" name="reader" type="java.lang.String"/>
-	    <many-to-one name="library" column="lib_id" class="intexsoftBookLibrary.library.Library" not-null="true"/>
+	    <many-to-one name="library" column="lib_id" class="intexsoftBookLibrary.library.Library" not-null="true" lazy="false"/>
 	</class>
 </hibernate-mapping>

@@ -1,6 +1,5 @@
 package intexsoftBookLibrary.dao;
 
-import intexsoftBookLibrary.dao.mysql.exceptions.BookNotFoundException;
 import intexsoftBookLibrary.dao.mysql.exceptions.DAOException;
 import intexsoftBookLibrary.dao.mysql.exceptions.InvalidBookFieldValueException;
 import intexsoftBookLibrary.library.Book;
@@ -16,7 +15,7 @@ public interface IBookDAO {
 	
 	public Book getBookById(int id) throws DAOException;
 	
-	public void update(Book book) throws DAOException, BookNotFoundException;
+	public void update(Book book) throws DAOException;
 	
 	public void create(Book book) throws DAOException, InvalidBookFieldValueException;
 }
