@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Book {
 	
-	private Integer ID;
+	private Integer ID = null;
 	private String author;
 	private String title;
 	private Timestamp issueDate;
@@ -14,6 +14,11 @@ public class Book {
 	
 	public Book(){
 		super();
+	}
+	
+	public Book(String author, String title){
+		this.author = author;
+		this.title = title;
 	}
 	
 	public Book(Integer iD, String author, String title) {

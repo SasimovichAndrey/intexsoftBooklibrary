@@ -7,16 +7,19 @@ import java.util.List;
 
 
 public class Library{
-	private List<Book> books;
+	private List<Book> books = new ArrayList<Book>();;
 	protected String name;
 	protected Integer id;
 	
 	public Library(){
-		
 	}
 	
 	public Library(Integer id, String name) {
 		this.books = new ArrayList<Book>();
+		this.name = name;
+	}
+	
+	public Library(String name){
 		this.name = name;
 	}
 	
@@ -39,7 +42,7 @@ public class Library{
 			books.add(book);
 		}
 		else{
-			throw new IdentifierAlreadyExiststException("A book with the same id already existed in this library");
+			throw new IdentifierAlreadyExiststException("A book with the same id already existed in this library. ID=" + book.getID());
 		}
 	}
 	
@@ -66,12 +69,12 @@ public class Library{
 		return books;
 	}
 
-	public Book getBookByIndex(int bookIndex){
-		return books.get(bookIndex);
-	}
-
 	public List<Book> getBooks(){
 		return books;
+	}
+	
+	public Book getBookByIndex(int bookIndex){
+		return books.get(bookIndex);
 	}
 
 	public String getName() {
@@ -91,6 +94,45 @@ public class Library{
 	}
 
 	public boolean equals(Object object){
+		if(!(object instanceof Library))
+			return false;
+		Library obj = (Library)object;
+		// Проверка id
+		if(id == null ^ obj.id == null){
+				return false;
+		}
+		else if(!(id == null && obj.id == null || id.equals(obj.id))){
+			return false;
+		}
+		
+		//Проверка name
+		if(name == null ^ obj.name == null){
+			return false;
+		}
+		else if(!(name == null && obj.name == null || name.equals(obj.name))){
+			return false;
+		}
+		
+		// Проверка books
+		if(books == null ^ obj.books == null){
+			return false;
+		}
+		else if(books == null && obj.books == null){
+			return true;
+		}
+		else if(books.size() == obj.books.size()){
+			for(int i = 0; i < books.size(); i++){
+				if(!(books.get(i).equals(obj.books.get(i))))
+					return false;
+			}
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
+	public boolean equals2(Object object){
 		if(object instanceof Library){
 			Library testObject = (Library)object;
 			if(name.equals(testObject.name) && (int)id == (int)testObject.id){

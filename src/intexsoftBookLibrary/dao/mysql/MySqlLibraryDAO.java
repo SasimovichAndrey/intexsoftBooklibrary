@@ -49,8 +49,8 @@ public class MySqlLibraryDAO implements ILibraryDAO{
 			session = HibernateConnector.getSession();
  			if(library.getName() == null)
  				throw new InvalidLibraryFieldValueException("Somelibrary fields are null");
- 			if(library.getBooks() != null){
- 				for(Book book : library.getBooks()){
+ 			if(library.getBookList() != null){
+ 				for(Book book : library.getBookList()){
  					if(book.getID() != null){
  						throw new InvalidNewLibraryBookException("All of book in new library must be with null-identifier");
  					}

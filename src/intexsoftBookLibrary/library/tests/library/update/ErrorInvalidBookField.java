@@ -4,7 +4,7 @@ import intexsoftBookLibrary.dao.mysql.exceptions.HiberanteConfigException;
 import intexsoftBookLibrary.library.Book;
 import intexsoftBookLibrary.library.Library;
 import intexsoftBookLibrary.library.exceptions.IdentifierAlreadyExiststException;
-import intexsoftBookLibrary.library.tests.library.LibraryTest;
+import intexsoftBookLibrary.library.tests.LibraryTest;
 
 import org.hibernate.HibernateException;
 import org.junit.After;
@@ -15,7 +15,7 @@ public class ErrorInvalidBookField extends LibraryTest{
 	
 	@Before
 	public void setUp() throws Exception {
-		super.init();
+		super.init(false);
 	}
 
 	@After

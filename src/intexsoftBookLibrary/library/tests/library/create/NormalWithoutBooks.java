@@ -3,7 +3,7 @@ package intexsoftBookLibrary.library.tests.library.create;
 import static org.junit.Assert.*;
 import intexsoftBookLibrary.dao.mysql.exceptions.HiberanteConfigException;
 import intexsoftBookLibrary.library.Library;
-import intexsoftBookLibrary.library.tests.library.LibraryTest;
+import intexsoftBookLibrary.library.tests.LibraryTest;
 
 import org.hibernate.HibernateException;
 import org.junit.After;
@@ -13,7 +13,7 @@ import org.junit.Test;
 public class NormalWithoutBooks extends LibraryTest {	
 	@Before
 	public void setUp() throws Exception {
-		super.init();
+		super.init(false);
 	}
 
 	@After

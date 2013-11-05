@@ -11,7 +11,7 @@ import intexsoftBookLibrary.dao.mysql.exceptions.InvalidNewLibraryBookException;
 import intexsoftBookLibrary.library.Book;
 import intexsoftBookLibrary.library.Library;
 import intexsoftBookLibrary.library.exceptions.IdentifierAlreadyExiststException;
-import intexsoftBookLibrary.library.tests.library.LibraryTest;
+import intexsoftBookLibrary.library.tests.LibraryTest;
 
 import org.hibernate.HibernateException;
 import org.junit.After;
@@ -22,7 +22,7 @@ public class NormalWithBooks extends LibraryTest {
 
 	@Before
 	public void setUp() throws Exception {
-		super.init();
+		super.init(false);
 	}
 
 	@After
@@ -45,6 +45,8 @@ public class NormalWithBooks extends LibraryTest {
 		//Чтение сохранённой библиотеки
 		Library actual = getLibrary(expected.getId());
 
+		expected.equals(actual);
+		
 		assertEquals(expected, actual);
 	}
 }

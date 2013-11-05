@@ -2,15 +2,15 @@
 <!DOCTYPE hibernate-mapping PUBLIC 
  "-//Hibernate/Hibernate Mapping DTD//EN"
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
-<hibernate-mapping>
-	<class name="intexsoftBookLibrary.library.Book" table="books">
+<hibernate-mapping package="intexsoftBookLibrary.library">
+	<class name="Book" table="books">
 		<id column="id" name="ID" type="java.lang.Integer">
 	      <generator class="increment"/>
 	    </id>
-	    <property column="author" name="author" type="java.lang.String"/>
-	    <property column="title" name="title" type="java.lang.String"/>
+	    <property column="author" name="author" type="java.lang.String" not-null="true"/>
+	    <property column="title" name="title" type="java.lang.String" not-null="true"/>
 	    <property column="issuedate" name="issueDate" type="java.sql.Timestamp"/>
 	    <property column="reader" name="reader" type="java.lang.String"/>
-	    <many-to-one name="library" column="lib_id" class="intexsoftBookLibrary.library.Library" not-null="true" lazy="false"/>
+	    <many-to-one name="library" column="lib_id" class="Library" not-null="true" lazy="false" cascade="delete"/>
 	</class>
 </hibernate-mapping>

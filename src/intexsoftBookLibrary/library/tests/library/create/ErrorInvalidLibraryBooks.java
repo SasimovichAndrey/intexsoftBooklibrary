@@ -7,11 +7,11 @@ import intexsoftBookLibrary.dao.mysql.exceptions.HiberanteConfigException;
 import intexsoftBookLibrary.library.Book;
 import intexsoftBookLibrary.library.Library;
 import intexsoftBookLibrary.library.exceptions.IdentifierAlreadyExiststException;
-import intexsoftBookLibrary.library.tests.library.LibraryTest;
+import intexsoftBookLibrary.library.tests.LibraryTest;
 
 import org.hibernate.HibernateException;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -21,9 +21,9 @@ public class ErrorInvalidLibraryBooks extends LibraryTest {
 	@Rule
     public ExpectedException thrown= ExpectedException.none();
 	
-	@Before
-	public void setUp() throws Exception {
-		super.init();
+	@BeforeClass
+	public static void setUp() throws Exception {
+		init(true);
 	}
 
 	@After
